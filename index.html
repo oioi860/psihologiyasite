@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Психолог | Роман Александрович Нерознак</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Прогресс-бар -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <!-- Toast-уведомление -->
+  <div class="toast-notification" id="toast">
+      <span class="toast-icon">✓</span>
+      <span id="toastMessage">Сообщение отправлено!</span>
+  </div>
+  
+  <!-- остальной код -->
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">Роман Александрович Нерознак</div>
+
+    <div class="nav-links">
+      <a href="#about">Обо мне</a>
+      <a href="#services">Запросы</a>
+      <a href="#price">Стоимость</a>
+      <a href="https://t.me/roninsepar" class="nav-btn" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+    </div>
+
+    <div class="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="#about">Обо мне</a>
+  <a href="#services">Запросы</a>
+  <a href="#price">Стоимость</a>
+  <a href="https://t.me/roninsepar" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+</div>
+
+<header class="hero">
+  <!-- Декоративные листья -->
+  <div class="decor-leaf decor-leaf-1"></div>
+  <div class="decor-leaf decor-leaf-2"></div>
+  <!-- остальной контент -->
+
+  <div class="container fade-in">
+    <h1>Обрести опору,
+      <br>когда всё идет не так
+    </h1>
+    <p>
+      Сопровождаю в работе с тревогой, выгоранием,
+      отношениями и самооценкой. Онлайн и офлайн в Москве.
+    </p>
+
+    <div class="buttons">
+      <a href="https://t.me/roninsepar" class="btn primary" target="_blank" rel="noopener noreferrer">Напишите мне в Telegram</a>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="section light">
+  <div class="container fade-in">
+    <div class="about-layout">
+      <!-- Левая колонка с текстом -->
+      <div class="about-text">
+        <span class="section-subtitle">✦ ПСИХОЛОГ-ПРАКТИК</span>
+        <h2>Пространство, где вас <span class="accent-word">услышат</span></h2>
+        <p class="lead">
+          Меня зовут Роман, я практикующий психолог. В своей работе опираюсь на искренность и уважение к вашему опыту.
+          Я не даю готовых советов, а помогаю вам самим найти ответы и внутреннюю опору — без оценки и давления.
+        </p>
+
+        <!-- КАРТОЧКИ ЦЕННОСТЕЙ -->
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon icon-scale"></div>
+            <div class="value-text">
+              <h4>Принятие</h4>
+              <p>Без осуждения и готовых решений</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon icon-confidential"></div>
+            <div class="value-text">
+              <h4>Безопасно</h4>
+              <p>Полная конфиденциальность</p>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon icon-individual"></div>
+            <div class="value-text">
+              <h4>В вашем темпе</h4>
+              <p>Идем так, как комфортно вам</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- КАРТОЧКИ С ИНФОРМАЦИЕЙ -->
+        <div class="info-cards">
+          <!-- Карточка: Образование -->
+          <div class="info-card">
+            <div class="info-icon">
+              <div class="icon-graduate"></div>
+            </div>
+            <div class="info-content">
+              <h4>Образование</h4>
+              <p>МГУ им. М.В. Ломоносова, факультет психологии</p>
+            </div>
+          </div>
+
+          <!-- Карточка: Специализация -->
+          <div class="info-card">
+            <div class="info-icon">
+              <div class="icon-therapy"></div>
+            </div>
+            <div class="info-content">
+              <h4>Специализация</h4>
+              <p>Гештальт-терапия, КПТ, телесно-ориентированная терапия</p>
+            </div>
+          </div>
+
+          <!-- Карточка: Формат работы -->
+          <div class="info-card">
+            <div class="info-icon">
+              <div class="icon-format"></div>
+            </div>
+            <div class="info-content">
+              <h4>Формат работы</h4>
+              <p>Онлайн / Офлайн </br> (Москва)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Правая колонка с фото -->
+      <div class="about-photo-wrapper">
+        <img src="img/photo.jpg" alt="Роман Александрович Нерознак" class="about-photo">
+        <div class="experience-badge">
+          <span class="exp-years">❤️</span>
+          <span class="exp-text">с душой<br>к делу</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="container fade-in">
+    <h2>С какими запросами я помогаю</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon icon-waves"></div>
+        <p class="card-title">Тревога, страхи, панические атаки</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-burnout"></div>
+        <p class="card-title">Эмоциональное выгорание, упадок сил</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-connection"></div>
+        <p class="card-title">Проблемы в паре, с детьми, с родителями</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-growth"></div>
+        <p class="card-title">Неуверенность, потеря себя, поиск смыслаа</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-leaf"></div>
+        <p class="card-title">Апатия, депрессия, потеря интереса к жизни</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="price" class="section light">
+  <div class="container fade-in">
+    <h2>Стоимость</h2>
+    <div class="price-box">
+  <p style="font-size: 24px; margin-bottom: 30px;">Индивидуальная сессия — 5 000 ₽</p>
+  <p style="font-size: 24px; margin-bottom: 30px;">Парная сессия — 7 000 ₽</p>
+  <div style="background: rgba(212, 205, 228, 0.3); padding: 20px; border-radius: 12px; margin-top: 20px;">
+    <p style="margin: 0;"><strong>Формат:</strong> онлайн или офлайн</p> 
+    <p style="margin: 10px 0 0;"><strong>Длительность:</strong> 50 минут</p>
+    <p style="margin: 10px 0 0; font-size: 0.9rem;"><strong>Оплата:</strong> разовая, перед сессией.</p> <!-- Добавить -->
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="section">
+  <div class="container fade-in">
+    <h2>Отзывы</h2>
+
+    <div class="slider">
+      <button class="prev">‹</button>
+
+      <div class="slide active">
+        <p>“Роман помог мне увидеть ситуацию под другим углом. Стало намного легче принимать решения.”</p>
+      </div>
+      <div class="slide">
+        <p>“Наконец-то я начал высыпаться и чувствовать себя спокойнее. Спасибо!”</p>
+      </div>
+      <div class="slide">
+        <p>“Очень комфортная и безопасная атмосфера. Чувствуется искреннее участие и профессионализм.”</p>
+      </div>
+
+      <button class="next">›</button>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section light">
+  <div class="container fade-in">
+    <h2>Готовы сделать первый шаг?</h2>
+    <p class="lead" style="text-align: center; margin-bottom: 30px;">Напишите в Telegram, и мы договоримся о первой встрече. Обычно отвечаю в течение нескольких часов.</p>
+    <div class="buttons" style="justify-content: center;">
+      <a href="https://t.me/roninsepar" class="btn primary" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div style="max-width: 1000px; margin: 0 auto;">
+    <div class="experience-badge">
+      <div class="exp-item">
+        <span class="exp-number">100+</span>
+        <span class="exp-label">книг по психологии</span>
+      </div>
+      <div class="exp-item">
+        <span class="exp-number">5</span>
+        <span class="exp-label">личная терапия (лет)</span>
+      </div>
+      <div class="exp-item">
+        <span class="exp-number">50+</span>
+        <span class="exp-label">часов супервизий</span>
+      </div>
+    </div>
+    <p style="font-size: 18px; margin: 50px 0 20px; text-align: center;">© 2026 Роман Александрович Нерознак | Психолог</p>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
