@@ -1361,3 +1361,257 @@ h2:hover::after {
     font-size: 1.3rem;
   }
 }
+/* ========== ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+
+@media (max-width: 768px) {
+  /* Отключаем все hover-анимации на мобильных */
+  .card:hover,
+  .info-card:hover,
+  .value-card:hover,
+  .btn:hover,
+  .nav-links a:hover,
+  .footer .exp-item:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: rgba(139, 158, 176, 0.15) !important;
+  }
+  
+  /* Убираем подчеркивание у ссылок в навигации */
+  .nav-links a::after {
+    display: none;
+  }
+  
+  /* Убираем анимацию плавающего фото */
+  .about-photo {
+    animation: none;
+  }
+  
+  /* Убираем задержки появления */
+  .fade-in {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  .fade-in.show {
+    transition-delay: 0s !important;
+  }
+  
+  /* Убираем анимацию заголовков */
+  h2:hover::after {
+    width: 60px; /* фиксируем, не расширяем */
+  }
+  
+  h2::after {
+    transition: none;
+  }
+  
+  /* Убираем свечение кнопок */
+  .primary {
+    box-shadow: 0 4px 15px rgba(194, 110, 79, 0.2);
+  }
+  
+  .primary:hover {
+    box-shadow: 0 4px 15px rgba(194, 110, 79, 0.2);
+  }
+  
+  /* Убираем transform у карточек */
+  .card::before {
+    transition: none;
+  }
+  
+  .card:hover::before {
+    height: 0; /* отключаем появление полоски */
+  }
+  
+  /* Убираем стрелку у кнопки на мобильных */
+  .primary::after {
+    display: none;
+  }
+  
+  .primary {
+    padding-right: 42px; /* возвращаем обычный padding */
+  }
+}
+
+/* ========== ИСПРАВЛЕНИЯ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ (iPhone 16 и меньше) ========== */
+
+@media (max-width: 480px) {
+  /* Карточки услуг - по 1 в ряд */
+  .cards {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+    padding: 0 5px;
+  }
+  
+  /* Карточки ценностей - по 1 в ряд */
+  .values-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+  
+  /* Информационные карточки - по 1 в ряд */
+  .info-cards {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+  
+  /* Уменьшаем отступы у карточек */
+  .card {
+    padding: 24px 20px;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .value-card {
+    padding: 16px;
+    width: 100%;
+    flex-direction: row;
+    text-align: left;
+  }
+  
+  .value-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  
+  .info-card {
+    padding: 16px;
+    width: 100%;
+  }
+  
+  /* Контейнер без лишних отступов */
+  .container {
+    width: 95%;
+    padding: 40px 0;
+  }
+  
+  /* Заголовки меньше */
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Убираем лишние отступы у секций */
+  .section {
+    padding: 0;
+  }
+  
+  /* Hero секция для маленьких экранов */
+  .hero {
+    padding: 100px 15px 60px;
+  }
+  
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+  }
+}
+
+/* ========== ДОПОЛНИТЕЛЬНО ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (до 375px) ========== */
+
+@media (max-width: 375px) {
+  .container {
+    width: 98%;
+    padding: 30px 0;
+  }
+  
+  .card {
+    padding: 20px 15px;
+  }
+  
+  .card-title {
+    font-size: 0.95rem;
+  }
+  
+  .value-text h4 {
+    font-size: 1rem;
+  }
+  
+  .value-text p {
+    font-size: 0.8rem;
+  }
+  
+  .btn {
+    padding: 14px 25px;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+  
+  .price-box {
+    padding: 30px 15px;
+  }
+  
+  .price-box p {
+    font-size: 1.5rem;
+  }
+  
+  .price-highlight {
+    font-size: 2rem;
+  }
+  
+  .price-box .price-details {
+    padding: 15px;
+  }
+  
+  .slider {
+    padding: 30px 15px;
+  }
+  
+  .slide p {
+    font-size: 1.1rem;
+    padding: 0 15px;
+  }
+  
+  .slide p::before {
+    font-size: 2.5rem;
+    left: -5px;
+    top: -15px;
+  }
+  
+  .slide p::after {
+    font-size: 2.5rem;
+    right: -5px;
+    bottom: -25px;
+  }
+}
+
+/* ========== ФИКСЫ ДЛЯ iPhone (специфичные) ========== */
+
+/* Для iPhone с Safe Area */
+@supports (padding: max(0px)) {
+  @media (max-width: 480px) {
+    .hero {
+      padding-left: max(15px, env(safe-area-inset-left));
+      padding-right: max(15px, env(safe-area-inset-right));
+    }
+    
+    .container {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* Исправление для касаний на мобильных */
+@media (hover: none) and (pointer: coarse) {
+  /* Убираем все hover-эффекты на тач-устройствах */
+  .card:hover,
+  .info-card:hover,
+  .value-card:hover,
+  .btn:hover,
+  .nav-links a:hover,
+  .footer .exp-item:hover {
+    transform: none !important;
+  }
+  
+  /* Делаем карточки кликабельными без анимации */
+  .card:active,
+  .info-card:active,
+  .value-card:active {
+    opacity: 0.8;
+    transition: opacity 0.1s;
+  }
+}
