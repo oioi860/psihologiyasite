@@ -1,0 +1,1363 @@
+:root {
+  --bg-main: #F6F5F9;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --bg-solid: #ffffff;
+
+  --text-title: #1E1E1E;
+  --text-body: #2A2A3A;        /* сделан темнее для контраста */
+  --text-muted: #5A5A6E;
+
+  --accent: #C26E4F;            /* терракотовый — главный акцент */
+  --accent-soft: #C26E4F22;     /* прозрачный для фонов */
+  --accent-gradient: linear-gradient(135deg, #C26E4F, #E07F5C);
+  
+  --primary-deep: #3F4A8A;      /* глубокий индиго как второстепенный */
+  --primary-muted: #7A6B9C;
+  --primary-soft: #B6A8D0;
+
+  --border-light: rgba(0,0,0,0.06);
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.06);
+  
+  --glass-strong: rgba(255, 255, 255, 0.7);
+  --glass-card: rgba(255, 255, 255, 0.6);
+  --gradient-accent: linear-gradient(135deg, #C26E4F, #E07F5C);
+}
+
+/* ========== СБРОС И БАЗА ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+/* ========== ФОН С ЦВЕТНЫМИ ПЯТНАМИ ========== */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--text-body);
+
+  /* Фон — приглушённый, с виньеткой и градиентными затемнениями */
+  background:
+    radial-gradient(circle at 0% 20%, #C26E4F22 0%, transparent 30%),
+    radial-gradient(circle at 100% 80%, #3F4A8A20 0%, transparent 35%),
+    radial-gradient(ellipse 120% 100% at 50% 0%,
+      transparent 0%,
+      rgba(40, 35, 55, 0.12) 50%,
+      rgba(30, 28, 45, 0.22) 100%),
+    radial-gradient(ellipse 80% 60% at 80% 100%,
+      transparent 30%,
+      rgba(50, 45, 65, 0.1) 100%),
+    linear-gradient(165deg,
+      rgba(235, 228, 248, 0.82) 0%,
+      rgba(225, 220, 242, 0.88) 40%,
+      rgba(218, 212, 238, 0.9) 100%),
+    url('../img/backgrounds/background.jpg');
+
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-blend-mode: normal, normal, normal, normal, soft-light, normal;
+
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ========== ТИПОГРАФИКА ========== */
+h1,
+h2,
+h3,
+h4,
+.logo {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-title);
+}
+
+h1 {
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  margin-bottom: 25px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1E1E1E;
+  text-shadow: 0 2px 15px rgba(255, 255, 255, 0.5);
+}
+
+h2 {
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  margin-bottom: 50px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+h2 .accent-word {
+  color: var(--accent);
+  position: relative;
+  display: inline-block;
+}
+
+h2 .accent-word::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--accent-soft);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--accent-gradient);
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+h2:hover::after {
+  width: 100%;
+}
+
+.section-subtitle {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--primary-muted);
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.lead {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--text-body);
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+/* ========== КОНТЕЙНЕРЫ И СЕКЦИИ ========== */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+.section {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.section.light {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(248, 245, 255, 0.3) 100%);
+}
+
+/* ========== НАВИГАЦИЯ ========== */
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: var(--glass-strong);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 30px;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-deep), var(--primary-soft));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-title);
+  font-weight: 500;
+  position: relative;
+  padding: 5px 0;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-btn::after {
+  display: none !important;
+}
+
+.nav-btn {
+  background: var(--primary-deep) !important;
+  color: white !important;
+  padding: 12px 30px !important;
+  border-radius: 40px;
+  border: none !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  backdrop-filter: none !important;
+  font-weight: 600 !important;
+}
+
+.nav-btn:hover {
+  transform: translateY(-3px);
+  background: var(--primary-muted) !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ========== БУРГЕР МЕНЮ ========== */
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.burger span {
+  height: 2px;
+  width: 25px;
+  background: var(--primary-deep);
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100vh;
+  background: var(--glass-strong);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  padding: 100px 40px;
+  transition: all 0.3s ease;
+  box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+  z-index: 999;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  color: var(--primary-deep);
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* ========== ГЕРОЙ ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 80px;
+  width: 100%;
+  position: relative;
+}
+
+.hero .container {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  animation: heroFadeIn 1.2s ease-out;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero p {
+  font-size: 1.3rem;
+  color: var(--text-body);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ========== FADE-IN ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== СЕКЦИЯ ОБО МНЕ ========== */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 30px;
+  align-items: center;
+}
+
+/* Левая колонка с текстом */
+.about-text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Сетка для карточек ценностей */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+/* Стиль карточки ценности */
+.value-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 14px 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(139, 158, 176, 0.15);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s ease;
+  text-align: center;
+}
+
+.value-card:hover {
+  transform: translateX(8px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 15px 30px -10px rgba(194, 110, 79, 0.2);
+}
+
+/* Иконки для карточек ценностей */
+.value-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.value-icon::before,
+.value-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
+/* Иконка: Весы (безоценочность) */
+.icon-scale::before {
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+  top: 28px;
+  left: 8px;
+  box-shadow: 0 -14px 0 var(--accent);
+}
+
+.icon-scale::after {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: transparent;
+  top: 10px;
+  left: 17px;
+}
+
+/* Иконка: Щит (конфиденциальность) */
+.icon-confidential::before {
+  width: 26px;
+  height: 30px;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 30% 30% 40% 40% / 40% 40% 30% 30%;
+  top: 5px;
+  left: 9px;
+}
+
+.icon-confidential::after {
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: transparent;
+  top: 14px;
+  left: 18px;
+}
+
+/* Иконка: Индивидуальный подход (силуэт) */
+.icon-individual::before {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: transparent;
+  top: 8px;
+  left: 16px;
+}
+
+.icon-individual::after {
+  width: 26px;
+  height: 14px;
+  border: 2px solid var(--accent);
+  border-radius: 40% 40% 30% 30%;
+  background: transparent;
+  top: 22px;
+  left: 9px;
+}
+
+/* Текст внутри карточки ценности */
+.value-text h4 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: var(--primary-deep);
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+}
+
+.value-text p {
+  font-size: 0.75rem;
+  color: var(--text-body);
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* ========== КАРТОЧКИ С ИНФОРМАЦИЕЙ (БЕЛЫЕ) ========== */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.info-card {
+  background: #ffffff;
+  padding: 20px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.02);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  height: fit-content;
+}
+
+.info-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 20px 30px -12px rgba(194, 110, 79, 0.15);
+}
+
+.info-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.info-icon [class^="icon-"] {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Общие стили для всех иконок */
+.info-icon [class^="icon-"]::before,
+.info-icon [class^="icon-"]::after {
+  content: '';
+  position: absolute;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Иконка: Шапочка выпускника */
+.icon-graduate::before {
+  width: 32px;
+  height: 20px;
+  border: 1.5px solid var(--accent);
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  top: 22px;
+  left: 14px;
+}
+
+.icon-graduate::after {
+  width: 10px;
+  height: 14px;
+  border: 1.5px solid var(--accent);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  top: 12px;
+  left: 25px;
+}
+
+.icon-graduate span {
+  position: absolute;
+  width: 4px;
+  height: 8px;
+  border: 1px solid var(--accent);
+  border-top: none;
+  border-radius: 0 0 2px 2px;
+  top: 30px;
+  left: 36px;
+  transform: rotate(10deg);
+}
+
+.icon-graduate span::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  top: 7px;
+  left: -1px;
+}
+
+/* Иконка: Переплетение */
+.icon-therapy::before {
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--accent);
+  border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
+  top: 16px;
+  left: 12px;
+  transform: rotate(10deg);
+}
+
+.icon-therapy::after {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--accent);
+  border-radius: 60% 40% 70% 30% / 40% 60% 40% 60%;
+  top: 22px;
+  left: 20px;
+  transform: rotate(-5deg);
+}
+
+/* Иконка: Глобус / экран */
+.icon-format::before {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  top: 13px;
+  left: 15px;
+}
+
+.icon-format::after {
+  width: 18px;
+  height: 12px;
+  border: 1.5px solid var(--accent);
+  border-top: none;
+  border-radius: 0 0 30% 30%;
+  top: 26px;
+  left: 21px;
+}
+
+.icon-format span {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  top: 19px;
+  left: 21px;
+  opacity: 0.5;
+}
+
+.icon-format span::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 1.5px;
+  background: var(--accent);
+  top: 8px;
+  left: -3px;
+  transform: rotate(-5deg);
+  opacity: 0.5;
+}
+
+.info-content h4 {
+  font-size: 1rem;
+  color: var(--primary-deep);
+  margin-bottom: 4px;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.info-content p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-body);
+  margin: 0;
+}
+
+/* ========== ПРАВАЯ КОЛОНКА (ФОТО) ========== */
+.about-photo-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: fit-content;
+}
+
+.about-photo {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.about-photo-wrapper .experience-badge {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background: var(--glass-strong);
+  backdrop-filter: blur(15px);
+  padding: 12px 22px;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.exp-years {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.exp-text {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-body);
+  line-height: 1.4;
+}
+
+/* ========== КАРТОЧКИ УСЛУГ (ПЛОТНЫЕ БЕЛЫЕ) ========== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 36px 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.02);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.02);
+  transition: all 0.4s ease;
+  color: var(--text-title);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--accent-gradient);
+  transition: height 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 40px -12px rgba(194, 110, 79, 0.2);
+  border-color: var(--accent-soft);
+}
+
+.card:hover::before {
+  height: 100%;
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon::before,
+.card-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0;
+  color: var(--text-title);
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Волны — тревога */
+.icon-waves {
+  background:
+    linear-gradient(90deg, transparent, var(--accent) 15%, var(--accent) 85%, transparent) center 10px / 38px 2px no-repeat,
+    linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent) 80%, transparent) center 22px / 32px 2px no-repeat,
+    linear-gradient(90deg, transparent, var(--accent) 25%, var(--accent) 75%, transparent) center 34px / 26px 2px no-repeat;
+}
+
+/* Выгорание */
+.icon-burnout::before {
+  width: 2px;
+  height: 22px;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%) rotate(-25deg);
+}
+
+.icon-burnout::after {
+  width: 2px;
+  height: 22px;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%) rotate(25deg);
+}
+
+/* Связь */
+.icon-connection::before {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  left: 6px;
+  top: 14px;
+}
+
+.icon-connection::after {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  right: 6px;
+  top: 8px;
+  left: auto;
+}
+
+.icon-connection {
+  border-top: 2px solid var(--accent);
+  width: 20px;
+  margin: 16px auto 0;
+  transform: rotate(-12deg);
+}
+
+/* Рост */
+.icon-growth::before {
+  width: 2px;
+  height: 24px;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+}
+
+.icon-growth::after {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-right: 2px solid var(--accent);
+  border-top: 2px solid var(--accent);
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+/* Лист */
+.icon-leaf::before {
+  width: 2px;
+  height: 28px;
+  left: 50%;
+  top: 2px;
+  transform: translateX(-50%);
+}
+
+.icon-leaf::after {
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 0 50% 50% 50%;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-55%) rotate(-45deg);
+}
+
+/* ========== СТОИМОСТЬ ========== */
+.price-box {
+  position: relative;
+  background: #ffffff;
+  padding: 60px;
+  border-radius: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.02);
+  text-align: center;
+  overflow: hidden;
+}
+
+.price-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--accent-gradient);
+}
+
+.price-box p {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-title);
+  font-family: "Cormorant Garamond", serif;
+}
+
+.price-highlight {
+  font-size: 3.2rem;
+  color: var(--accent);
+  display: block;
+  margin: 10px 0;
+}
+
+.price-box .price-details {
+  background: var(--accent-soft);
+  padding: 25px;
+  border-radius: 20px;
+  margin-top: 30px;
+  border-left: 4px solid var(--accent);
+  text-align: left;
+}
+
+/* ========== СЛАЙДЕР ========== */
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background: #ffffff;
+  padding: 60px 40px;
+  border-radius: 40px;
+  border: 1px solid rgba(0,0,0,0.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+  animation: slideFade 0.5s ease;
+}
+
+@keyframes slideFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prev,
+.next {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.02);
+  color: var(--accent);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+  z-index: 2;
+}
+
+.slider .prev:hover,
+.slider .next:hover {
+  background: var(--accent-gradient);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(194, 110, 79, 0.3);
+}
+
+.slide p {
+  font-size: 1.6rem;
+  color: var(--text-title);
+  font-style: italic;
+  font-family: "Cormorant Garamond", serif;
+  position: relative;
+  padding: 0 30px;
+}
+
+.slide p::before {
+  content: '"';
+  font-size: 4rem;
+  color: var(--accent);
+  opacity: 0.2;
+  position: absolute;
+  left: -10px;
+  top: -20px;
+}
+
+.slide p::after {
+  content: '"';
+  font-size: 4rem;
+  color: var(--accent);
+  opacity: 0.2;
+  position: absolute;
+  right: -10px;
+  bottom: -40px;
+}
+
+/* ========== УЛУЧШЕННАЯ CTA КНОПКА ========== */
+.btn {
+  display: inline-block;
+  padding: 18px 42px;
+  border-radius: 60px;
+  font-weight: 600;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: 0 8px 25px rgba(194, 110, 79, 0.3);
+  padding-right: 55px;
+}
+
+.primary::after {
+  content: '→';
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  transition: right 0.3s ease;
+}
+
+.primary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(194, 110, 79, 0.4);
+}
+
+.primary:hover::after {
+  right: 25px;
+}
+
+.secondary {
+  background: transparent;
+  border: 2px solid var(--primary-deep);
+  color: var(--primary-deep);
+}
+
+.secondary:hover {
+  background: var(--primary-deep);
+  color: white;
+}
+
+/* ========== ФУТЕР ========== */
+.footer {
+  background: #ffffff;
+  padding: 60px 30px;
+  border-top: 1px solid rgba(0,0,0,0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer .experience-badge {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.footer .exp-item {
+  text-align: center;
+  background: white;
+  padding: 25px 40px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  transition: transform 0.4s ease;
+}
+
+.footer .exp-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(194, 110, 79, 0.1);
+}
+
+.footer .exp-number {
+  display: block;
+  color: var(--accent);
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: "Cormorant Garamond", serif;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.footer .exp-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.85;
+  color: var(--text-body);
+}
+
+/* ========== TOAST ========== */
+.toast-notification {
+  background: var(--glass-strong);
+  backdrop-filter: blur(20px);
+  color: var(--text-title);
+  border: 1px solid white;
+}
+
+.toast-icon {
+  color: var(--accent);
+}
+
+/* ========== ПРОГРЕСС БАР ========== */
+.scroll-progress {
+  background: var(--accent-gradient);
+  box-shadow: 0 0 20px rgba(194, 110, 79, 0.35);
+}
+
+/* ========== СКРОЛЛБАР ========== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(248, 245, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), #E07F5C);
+  border-radius: 5px;
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+@media (max-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .about-photo {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-text {
+    text-align: left;
+    order: 2;
+  }
+
+  .about-photo-wrapper {
+    order: 1;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .about-photo {
+    width: 320px;
+    height: 320px;
+  }
+
+  h2::after {
+    left: 0;
+    transform: none;
+  }
+
+  .info-cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .container {
+    padding: 60px 0;
+  }
+
+  .about-photo {
+    width: 280px;
+    height: 280px;
+  }
+
+  .about-photo-wrapper .experience-badge {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 18px;
+  }
+
+  .exp-years {
+    font-size: 1.8rem;
+  }
+
+  .info-cards {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .value-card {
+    padding: 14px 18px;
+  }
+
+  .slider {
+    flex-direction: column;
+    padding: 40px 25px;
+  }
+
+  .footer .experience-badge {
+    gap: 40px;
+    flex-direction: column;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-photo {
+    width: 240px;
+    height: 240px;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .info-card {
+    flex-direction: row;
+    text-align: left;
+    padding: 16px 18px;
+  }
+
+  .info-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0;
+  }
+
+  .info-content p {
+    font-size: 0.85rem;
+  }
+
+  .value-card {
+    padding: 12px 16px;
+  }
+
+  .value-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .value-text h4 {
+    font-size: 1rem;
+  }
+
+  .value-text p {
+    font-size: 0.8rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .price-box {
+    padding: 40px 25px;
+  }
+  
+  .price-box p {
+    font-size: 1.8rem;
+  }
+  
+  .price-highlight {
+    font-size: 2.5rem;
+  }
+
+  .card {
+    padding: 28px 24px;
+  }
+  
+  .slider {
+    padding: 40px 20px;
+  }
+  
+  .slide p {
+    font-size: 1.3rem;
+  }
+}
